@@ -1,0 +1,74 @@
+@layer post {
+    .blog-heading > h1 {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-heading > p {
+        margin-top: 0;
+    }
+
+    main > .card {
+        display: block;
+        text-decoration: none;
+        color: #444;
+
+        border: 1px solid #d5d5d5;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+    }
+
+    main > .card h3,
+    main > .card h4,
+    main > .card h5,
+    main > .card h6 {
+        color: #444;
+    }
+
+    main > .card > .card-header {
+        padding: 0.5rem 1rem;
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #d5d5d5;
+    }
+
+    main > .card > .card-body {
+        padding: 0.5rem 1rem;
+    }
+
+    main > .card h2 {
+        font-size: 1.5rem;
+    }
+
+    main > .card h3 {
+        font-size: 1.25rem;
+    }
+
+    main > .card h2 {
+        color: #36a1ff;
+        transition: color 0.2s ease-in-out;
+        margin-top: 0.5rem;
+    }
+
+    main > .card:hover h2 {
+        color: #297ac2;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        main > .card {
+            color: #aaa;
+            border: 1px solid #202024;
+        }
+
+        main > .card h3,
+        main > .card h4,
+        main > .card h5,
+        main > .card h6 {
+            color: #aaa;
+        }
+
+        main > .card > .card-header {
+            background-color: #1f1f23;
+            border-bottom: 1px solid #202024;
+        }
+    }
+}

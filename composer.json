@@ -1,0 +1,15 @@
+{
+    "name": "jfhr/jfhr.me",
+    "type": "project",
+    "license": "CC0",
+    "authors": [
+        {
+            "name": "jfhr",
+            "email": "me@jfhr.de"
+        }
+    ],
+    "require": {
+        "loilo/fuse": "^6.6",
+        "scrivo/highlight.php": "v9.18.1.9"
+    }
+}
