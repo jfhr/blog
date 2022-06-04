@@ -1,6 +1,6 @@
 <?php
 
-function get_posts()
+function get_posts_v1()
 {
     $posts = array();
     ob_start(null, 0, PHP_OUTPUT_HANDLER_CLEANABLE | PHP_OUTPUT_HANDLER_REMOVABLE);
@@ -37,5 +37,15 @@ function get_posts()
         return 0;
     });
 
+    return $posts;
+}
+
+function get_posts() {
+    $conn = pg_connect('user=blog');
+    $result = pg_query($conn, 'select title, description, date, slug, content from posts');
+    $posts = array();
+    while ($post = pg_fetch_array($result)) {
+        array_push($posts, $post);
+    }
     return $posts;
 }

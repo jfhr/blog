@@ -1,7 +1,5 @@
 <?php
 
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
-
 require_once __DIR__ . '/.get_posts.php';
 $posts = get_posts();
 
@@ -10,6 +8,8 @@ function rfc822date($date) {
 }
 
 header('content-type: application/rss+xml');
+
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
 ?>
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
