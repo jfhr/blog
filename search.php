@@ -6,22 +6,22 @@ if (!key_exists('q', $_GET) || $_GET['q'] === '') {
 
 $query = $_GET['q'];
 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/.get_posts.php';
-
-$posts = get_posts();
-$fuse = new \Fuse\Fuse($posts, array(
-    'keys' => array('title', 'description', 'content'),
-));
-$results = $fuse->search($query);
+$conn = pg_connect('user=blog');
+$results = pg_query_params($conn, '
+        select title, description, date, slug, content
+        from posts, 
+            to_tsvector(slug || \' \' || title || \' \' || description || \' \' || content || \' \') as textsearch,
+            to_tsquery($1) as query
+        where textsearch @@ query
+        order by ts_rank_cd(textsearch, query) desc;',
+    array($query)
+);
 
 require __DIR__ . '/.begin.php';
 ?>
     <style><?php require_once __DIR__ . '/index.css' ?></style>
 <?php
-foreach ($results as $result) {
-    $post = $result['item'];
-    ?>
+while ($post = pg_fetch_array($results)) { ?>
     <a href="./<?php echo $post['slug'] ?>" class="card">
         <div class="card-header">
             <small>

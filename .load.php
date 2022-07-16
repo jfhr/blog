@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/.get_posts.php';
-$posts = get_posts();
+$posts = get_posts_from_fs();
 
 $conn = pg_connect('user=blog');
 foreach ($posts as $post) {
