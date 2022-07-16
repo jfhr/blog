@@ -7,6 +7,7 @@ header('link: '
 
 $title = 'CC 0';
 $date = '2021-05-21';
+$code = false;
 
 require_once __DIR__ . '/../.begin.php';
 ?>

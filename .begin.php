@@ -1,11 +1,15 @@
 <?php
-header('link: '
-    . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/a11y-light.css"; media="(prefers-color-scheme: light and prefers-contrast: more)",'
-    . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/default.css"; media="(prefers-color-scheme: light and not(prefers-contrast: more))",'
-    . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/a11y-dark.css"; media="(prefers-color-scheme: dark and prefers-contrast: more)",'
-    . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/github-dark-dimed.css"; media="(prefers-color-scheme: dark and not(prefers-contrast: more))",'
-    . 'rel="preload"; as="script"; type="application/javascript" href="https://jfhr.me/assets/highlight.min.js",'
-);
+if (!isset($code)) {
+    $code = true;
+}
+
+if ($code) {
+    $link = 'link: '
+        . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/a11y-light.css"; media="(prefers-color-scheme: light and prefers-contrast: more)",'
+        . 'rel="preload"; as="stylesheet"; type="text/css" href="https://jfhr.me/assets/a11y-dark.css"; media="(prefers-color-scheme: dark and prefers-contrast: more)",'
+        . 'rel="preload"; as="script"; type="application/javascript" href="https://jfhr.me/assets/highlight.min.js"';
+    header($link);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -289,10 +293,10 @@ header('link: '
         }
     </style>
 
-    <link rel="stylesheet" href="https://jfhr.me/assets/a11y-dark.css" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://jfhr.me/assets/a11y-light.css" media="(prefers-color-scheme: light)">
-<!--    <link rel="stylesheet" href="https://jfhr.me/assets/a11y-light.css" media="(prefers-color-scheme: light) and (prefers-contrast: more)">-->
-<!--    <link rel="stylesheet" href="https://jfhr.me/assets/default.css" media="(prefers-color-scheme: light) and (not (prefers-contrast: more))">-->
+    <?php if ($code) { ?>
+        <link rel="stylesheet" href="https://jfhr.me/assets/a11y-dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://jfhr.me/assets/a11y-light.css" media="(prefers-color-scheme: light)">
+    <?php } ?>
 
     <?php
     if (!isset($title)) {
@@ -321,7 +325,11 @@ header('link: '
         }
         function initializeSw() {
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js');
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    if (registration) {
+                        registration.unregister();
+                    }
+                });
             }
         }
 

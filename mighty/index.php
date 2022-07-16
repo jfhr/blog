@@ -8,6 +8,7 @@ header('link: '
 $title = 'Mighty';
 $description = "I've recently read about the project Mighty. Tl;dr, it's stadia for the web browser. Mighty runs Chrome on their server and streams it to your device, promising better performance and less battery use. Sounds interesting, and I'll definitely try it once it's available - but there are some things I want to talk about.";
 $date = '2021-06-04';
+$code = false;
 
 require_once __DIR__ . '/../.highlight.php';
 require_once __DIR__ . '/../.begin.php';

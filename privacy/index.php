@@ -7,6 +7,7 @@ header('link: '
 
 $title = 'Privacy Policy';
 $date = '2022-04-09';
+$code = false;
 
 require_once __DIR__ . '/../.begin.php';
 
